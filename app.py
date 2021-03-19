@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from flask_table import Table, Col
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
@@ -31,6 +32,11 @@ def register():
         db.session.add(user)
         db.session.commit()
         return 'Successfully registered!'
+
+@app.route('/users')
+def users():
+    users = Register.query.all()
+    return render_template('users.html', users=users)
 
 if __name__ == '__main__':
     app.run(debug=True)
