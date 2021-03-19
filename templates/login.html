@@ -1,0 +1,39 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Login
+{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('.static', filename='signin.css')}}">
+{% endblock %}
+
+
+{% block content %}
+<div class="container mt-130">
+    <div class="row">
+        <div class="col-md-5">
+            <h1 class="text-dark display-4 mt-75" style="font-size: 80px;">Faculty Login for ERP Portal</h1>
+        </div>
+        <div class="col-md-7">
+            <div class="card bg-light wdth-80 ma">
+                <div class="card-body card-color-cust">
+                    <form class="form" method="POST" action="/login">
+                        {{ form.hidden_tag() }}
+                        {{ wtf.form_field(form.username) }}
+                        {{ wtf.form_field(form.password) }}
+                        {{ wtf.form_field(form.remember) }}
+                        <input class="btn btn-login-grad max-width" type="submit" value="Sign In">
+                    </form><br>
+                    <p class="mt-2">New User? <a href="register">Register</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW" crossorigin="anonymous">
+</script>
