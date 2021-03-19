@@ -3,7 +3,8 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite///register.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_TRACK_NOTIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 class Register(db.Model):
@@ -12,10 +13,24 @@ class Register(db.Model):
     email = db.Column(db.String(30))
     password = db.Column(db.String(20))
 
+    def __repr__(self) -> str:
+        return f"Register('{self.username}', '{self.email}')"
 
-@app.route('/')
+
+@app.route('/', methods=['GET', 'POST'])
 def index():
-    return render_template('register.html')
+    return render_template('index.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        email = request.form['email']
+        password = request.form['password']
+        user = Register(username=username, email=email, password=password)
+        db.session.add(user)
+        db.session.commit()
+        return 'Successfully registered!'
 
 if __name__ == '__main__':
     app.run(debug=True)
