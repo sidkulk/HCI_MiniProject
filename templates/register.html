@@ -1,27 +1,26 @@
-<!-- This is just a test form for testing SQLAlchemy ORM framework. Not to be deployed in production env!  -->
-<div class="" style="text-align: center;">
-    <h3>Register Here</h3>
-    <form method="POST" action="register">
-        <table style="display: inline-table;">
-            <tr>
-                <td>Name</td>
-                <td><input type="text" name="username" value="" placeholder="Name"></td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><input type="text" name="email" value="" placeholder="Email"></td>
-            </tr>
-            <tr>
-                <td>Password</td>
-                <td><input type="password" name="password" value="" placeholder="Password"></td>
-            </tr>
-        </table>
+{% extends "layout.html" %}
+{% block body %}
+<div class="container">
+    <h1>Register</h1>
+    <br>
+    <form action="" method="POST">
+        <div class="form-group">
+            <input type="text" name="username" class="form-control" placeholder="Username" required>
+        </div>
         <br>
+        <div class="form-group">
+            <input type="email" name="email" class="form-control" placeholder="Email" required>
+        </div>
         <br>
-        <input type="submit" name="" value="Submit">
+        <div class="form-group">
+            <input type="password" name="password" class="form-control" placeholder="Password" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <input type="password" name="cpassword" class="form-control" placeholder="Confirm Password" required>
+        </div>
+        <br>
+        <button class="btn btn-primary" type="submit">Register</button>
     </form>
 </div>
-
-<div style="text-align: center;"> 
-    <a href="users"><button>View All Users</button></a>
-</div>
+{% endblock %}
